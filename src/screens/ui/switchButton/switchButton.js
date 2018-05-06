@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Text, Switch} from 'react-native'
+import { StyleSheet,View, Switch} from 'react-native'
 
 const styles = StyleSheet.create({
     switch: {
         overflow: 'hidden',
-        width: 34,
+        width: 40,
         height: 34,
         borderRadius: 34 / 2,
         justifyContent: 'center',
@@ -13,16 +13,46 @@ const styles = StyleSheet.create({
 });
 
 // Our custom component we want as a button in the nav bar
-const CustomButton = ({ text }) => {
-    return(
+class SwitchButton  extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            switchValue : false
+        }
+    }
 
-            <View style={styles.switch}>
-                <Switch onSyncPress={value => this.setState({value})}/>
+    ShowAlert = (value) =>{
+
+        this.setState({
+
+            switchValue: value
+        });
+
+        if(value === true)
+        {
+            //Perform any task here which you want to execute on Switch ON event.
+            //alert("Switch is On.");
+        }
+        else{
+            //Perform any task here which you want to execute on Switch OFF event.
+            //alert("Switch is Off.");
+        }
+
+    }
+
+    render() {
+        return (
+
+            <View>
+                <Switch
+                    style={styles.switch}
+                    onValueChange={(value) => this.ShowAlert(value)}
+                    value={this.state.switchValue}/>
             </View>
 
 
         )
-
+    }
 };
 
-export default CustomButton
+export default SwitchButton

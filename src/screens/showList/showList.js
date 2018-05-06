@@ -11,8 +11,8 @@ class ShowListScreen extends Component {
 
         rightButtons: [
             {
-                id: 'custom-button',
-                component: 'CustomButton', // This line loads our component as a nav bar button item
+                id: 'switch-button',
+                component: 'SwitchButton', // This line loads our component as a nav bar button item
                 passProps: {
                     text: 'Hi!',
                 }
@@ -57,12 +57,10 @@ class ShowListScreen extends Component {
 
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
         if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id == 'edit') { // this is the same id field from the static navigatorButtons definition
+            if (event.id === 'switch-button') { // this is the same id field from the static navigatorButtons definition
                 alert('NavBar', 'Edit button pressed');
             }
-            if (event.id == 'add') {
-                alert('NavBar', 'Add button pressed');
-            }
+
         }
     }
 

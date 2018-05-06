@@ -4,7 +4,7 @@ import AuthScreen from './src/screens/Auth/Auth';
 import ShowListScreen from './src/screens/showList/showList';
 import RandomShow from './src/screens/RandomShow/RandomShow';
 import Favorites from './src/screens/Favorites/Favorites';
-import CustomButton from './src/screens/ui/switchButton/switchButton'
+import SwitchButton from './src/screens/ui/switchButton/switchButton'
 import configureStore from './src/store/configureStore';
 
 const store = configureStore();
@@ -15,7 +15,7 @@ Navigation.registerComponent("moviesRadar.AuthScreen", () => AuthScreen, store, 
 Navigation.registerComponent("moviesRadar.ShowList", () => ShowListScreen, store, Provider);
 Navigation.registerComponent("moviesRadar.RandomShow", () => RandomShow, store, Provider);
 Navigation.registerComponent("moviesRadar.Favorites", () => Favorites, store, Provider);
-Navigation.registerComponent('CustomButton', () => CustomButton);
+Navigation.registerComponent('SwitchButton', () => SwitchButton, store, Provider);
 
 // Starting App
 Navigation.startSingleScreenApp({

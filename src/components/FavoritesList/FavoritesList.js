@@ -14,7 +14,7 @@ class FavoritesList extends React.Component{
                 ref='listRef'
                 data={this.props.favorites}
                 renderItem={this.renderItem}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => index.toString()}
             />
         )
     };
