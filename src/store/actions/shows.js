@@ -1,4 +1,4 @@
-import { DATA_AVAILABLE, ADD_PLACE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE } from './actionTypes'
+import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE } from './actionTypes'
 
 export const getData =()=>{
 
@@ -18,11 +18,22 @@ export const getData =()=>{
 
            };
 
-export const addPlace=(placeName)=>{
-    return {
-        type: ADD_PLACE,
-        placeName: placeName
-    };
+export const addFavorite=(item)=>{
+    return (dispatch) => {
+            const favoritesData = {
+                name: "Movie name",
+                description: "Movie description"
+            };
+            fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
+                method: "POST",
+                body: JSON.stringify(favoritesData)
+            })
+                .catch(err => console.log(err))
+                .then(res => res.json())
+                .then(parsedRef => {
+                    console.log(parsedRef)
+                });
+        };
 };
 
 export const deletePlace = () => {

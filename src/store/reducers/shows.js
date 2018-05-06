@@ -1,7 +1,7 @@
-import { DATA_AVAILABLE,ADD_PLACE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE } from '../actions/actionTypes'
+import { DATA_AVAILABLE,ADD_FAVORITE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE } from '../actions/actionTypes'
 
 const initialState={
-    places: [],
+    shows: [],
     selectedItem: null,
     data: [],
 };
@@ -14,14 +14,15 @@ const reducer = (state = initialState, action)=>{
                 data: action.data
             };
 
-        case 'ADD_PLACE':
+        case 'ADD_FAVORITE':
+            console.log("Add Favorite Reducer"+ action.show);
             return{
                 ...state,
-                places: state.places.concat({key: Math.random(),
-                    name: action.placeName,
-                    image: {
-                        uri: "http://images.intouchweekly.com/uploads/images/file/31967/courteney-cox-friends-monica-hair-2.jpg?fit=crop&h=510&w=680"
-                    }})
+                    shows: state.shows.concat({
+                    key: Math.random(),
+                    show: action.show
+                })
+
             };
         case 'DELETE_PLACE':
             return {

@@ -2,6 +2,26 @@ import React from 'react';
 import { Modal, View, Image, Text, Button, StyleSheet, ScrollView } from 'react-native';
 
 const itemDetails = (props) => {
+
+    const onAddFavorites = () => {
+        const favoritesData = {
+            movieTitle: props.selectedItem.title,
+            poster: props.selectedItem.poster_path,
+            vote: props.selectedItem.vote_average,
+            release_date: props.selectedItem.release_date,
+            overview: props.selectedItem.overview
+        };
+        fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
+            method: "POST",
+            body: JSON.stringify(favoritesData)
+        })
+            .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(parsedRef => {
+                console.log(parsedRef)
+            });
+
+    };
     let modalContent = null;
     if(props.selectedItem){
         const image = 'https://image.tmdb.org/t/p/w154' + props.selectedItem.poster_path;
@@ -24,7 +44,7 @@ const itemDetails = (props) => {
         <Modal onRequestClose={props.onModalClose} visible={props.selectedItem != null} animationType={'slide'}>
             <View style={styles.modal}>
                 {modalContent}
-                <Button style={styles.buttons} title={"Add to My List"} color={'#33ADFF'} onPress={props.onItemSelected}/>
+                <Button onPress={onAddFavorites} style={styles.buttons} title={"Add to My List"} color={'#33ADFF'}/>
                 <Button style={styles.buttons} title={"Close"} color={"red"} onPress={props.onModalClose}/>
             </View>
         </Modal>

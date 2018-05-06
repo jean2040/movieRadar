@@ -4,7 +4,6 @@ import {StyleSheet, FlatList, TouchableOpacity, View, Text, Image} from 'react-n
 class showList extends React.Component{
     constructor(props){
         super(props);
-        console.log("showList"+ props.data);
         this.renderItem = this.renderItem.bind(this);
     }
 
