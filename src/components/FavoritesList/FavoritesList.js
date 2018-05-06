@@ -20,7 +20,7 @@ class FavoritesList extends React.Component{
     };
 
     renderItem({item}){
-        const image = 'https://image.tmdb.org/t/p/w154' + item.poster;
+        const image = 'https://image.tmdb.org/t/p/w154' + item.poster_path;
         return(
             <TouchableOpacity onPress={() => this.props.onItemSelected(item)}>
                 <View style={styles.row}>

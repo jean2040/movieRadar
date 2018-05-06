@@ -6,7 +6,7 @@ const itemDetails = (props) => {
     const onAddFavorites = () => {
         const favoritesData = {
             movieTitle: props.selectedItem.title,
-            poster: props.selectedItem.poster_path,
+            poster_path: props.selectedItem.poster_path,
             vote: props.selectedItem.vote_average,
             release_date: props.selectedItem.release_date,
             overview: props.selectedItem.overview
