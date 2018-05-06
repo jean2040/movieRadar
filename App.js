@@ -6,6 +6,7 @@ import ShowList from './src/components/showList/showlist'
 import PlaceInput from './src/components/PlaceInput/PlaceInput';
 import MovieDetail from './src/components/MovieDetails/MovieDetails';
 import {getData, addPlace, deletePlace, deselectPlace, selectedPlace} from "./src/store/actions";
+import TabNavigator from './src/components/TabNavigator/TabNavigator'
 
 
 class App extends React.Component {
@@ -40,6 +41,7 @@ class App extends React.Component {
                              onItemDeleted={this.placeDeletedHandler}
                              onModalClose={this.modalClosedHandler}/>
                 <PlaceInput onPlaceAdded={this.placeAddedHandler}/>
+
                 <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler}/>
 
             </View>
