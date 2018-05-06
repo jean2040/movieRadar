@@ -1,1 +1,1 @@
-export { getData,addFavorite,deletePlace,deselectPlace, selectedPlace } from './shows'
+export { getData,addFavorite,deletePlace,deselectPlace, selectedPlace, fetchFavorites } from './shows'

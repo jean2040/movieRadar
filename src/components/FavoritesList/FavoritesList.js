@@ -1,31 +1,31 @@
 import React from 'react';
 import {StyleSheet, FlatList, TouchableOpacity, View, Text, Image} from 'react-native';
 
-class showList extends React.Component{
+class FavoritesList extends React.Component{
     constructor(props){
         super(props);
         this.renderItem = this.renderItem.bind(this);
-
+        console.log("favorite list"+this.props.favorites)
     }
 
     render(){
         return (
-               <FlatList
-                    ref='listRef'
-                    data={this.props.data}
-                    renderItem={this.renderItem}
-                    keyExtractor={(item, index) => index}
-                />
+            <FlatList
+                ref='listRef'
+                data={this.props.favorites}
+                renderItem={this.renderItem}
+                keyExtractor={(item, index) => index}
+            />
         )
     };
 
     renderItem({item}){
-        const image = 'https://image.tmdb.org/t/p/w154' + item.poster_path;
+        const image = 'https://image.tmdb.org/t/p/w154' + item.poster;
         return(
             <TouchableOpacity onPress={() => this.props.onItemSelected(item)}>
                 <View style={styles.row}>
                     <Text style={styles.title}>
-                        {item.title}
+                        {item.movieTitle}
                     </Text>
                     <Image
                         style={styles.poster}
@@ -37,10 +37,10 @@ class showList extends React.Component{
             </TouchableOpacity>
         )
     }
-    }
+}
 
 
-export default showList
+export default FavoritesList
 
 const styles = StyleSheet.create({
     listContainer:{
