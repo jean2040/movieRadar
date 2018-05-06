@@ -5,8 +5,6 @@ import ListItem from '../ListItem/ListItem';
 
 const List = (props) => {
 
-
-
     return (
         <FlatList style={styles.listContainer}
                     data={props.places}

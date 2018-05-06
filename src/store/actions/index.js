@@ -1,1 +1,1 @@
-export { addPlace,deletePlace,deselectPlace, selectedPlace } from './places'
+export { getData,addPlace,deletePlace,deselectPlace, selectedPlace } from './shows'
