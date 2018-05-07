@@ -1,4 +1,4 @@
-import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE,FETCH_FAVORITES } from './actionTypes';
+import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
 import { startLoading, stopLoading } from './index'
 
 export const getData =()=>{
@@ -49,16 +49,26 @@ export const deletePlace = () => {
   }
 };
 
-export const selectedPlace =(item) => {
+export const selectedPlace =(item, modalType) => {
     return {
-        type: SELECT_PLACE,
-        item: item
+        type: SELECT_SHOW,
+        item: item,
+        modalType: modalType
+
+    }
+};
+export const selectedPlace2 =(item, modalType) => {
+    return {
+        type: SELECT_SHOW,
+        item: item,
+        modalType: modalType
+
     }
 };
 
 export const deselectPlace = () => {
     return {
-        type: DESELECT_PLACE
+        type: DESELECT_SHOW
     }
 };
 

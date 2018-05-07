@@ -1,10 +1,11 @@
-import { DATA_AVAILABLE,ADD_FAVORITE, DELETE_PLACE, DESELECT_PLACE, SELECT_PLACE, FETCH_FAVORITES } from '../actions/actionTypes'
+import { DATA_AVAILABLE,ADD_FAVORITE, DELETE_PLACE, DESELECT_SHOW, SELECT_SHOW, FETCH_FAVORITES } from '../actions/actionTypes'
 
 const initialState={
     shows: [],
     selectedItem: null,
     data: [],
-    favorites: []
+    favorites: [],
+    modalType: null
 };
 
 const reducer = (state = initialState, action)=>{
@@ -39,12 +40,13 @@ const reducer = (state = initialState, action)=>{
                 selectedItem: null
             };
 
-        case 'SELECT_PLACE':
+        case 'SELECT_SHOW':
             return{
                 ...state,
-                selectedItem: action.item
+                selectedItem: action.item,
+                modalType: action.modalType
                 };
-        case 'DESELECT_PLACE':
+        case 'DESELECT_SHOW':
             return{
                 ...state,
                 selectedItem: null

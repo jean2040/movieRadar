@@ -1,2 +1,2 @@
-export { getData,addFavorite,deletePlace,deselectPlace, selectedPlace, fetchFavorites } from './shows'
+export { getData,addFavorite,deletePlace,deselectPlace, selectedPlace, fetchFavorites, selectedPlace2 } from './shows'
 export { startLoading, stopLoading } from './uiActions'

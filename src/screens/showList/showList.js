@@ -29,9 +29,9 @@ class ShowListScreen extends Component {
         this.props.onGetData(); //call the action
         }
 
-    placeSelectedHandler = (item) =>{
+    placeSelectedHandler = (item, modalType) =>{
         console.log("Select item");
-        this.props.onSelectPlace(item);
+        this.props.onSelectPlace(item, modalType);
     };
     modalClosedHandler =()=>{
         console.log("DeSelect item");
@@ -55,6 +55,7 @@ class ShowListScreen extends Component {
 
                 <View>
                     <MovieDetail selectedItem={this.props.selectedItem}
+                                 modalType={this.props.modalType}
                                  onModalClose={this.modalClosedHandler}
                     />
                     <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler} />
@@ -80,6 +81,7 @@ class ShowListScreen extends Component {
 const mapStateToProps = state => {
     return {
         selectedItem: state.places.selectedItem,
+        modalType:  state.places.modalType,
         data: state.places.data,
         isLoading: state.ui.isLoading
     }
@@ -88,7 +90,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>{
     return{
         onGetData:()=>dispatch(getData()),
-        onSelectPlace: (item) => dispatch(selectedPlace(item)),
+        onSelectPlace: (item, modalType) => dispatch(selectedPlace(item, modalType)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
         onAddFavorite: () => dispatch(addFavorite())
     }

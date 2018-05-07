@@ -39,12 +39,22 @@ const itemDetails = (props) => {
             </ScrollView>
         );
     }
+    let buttonContent = null;
+    if(props.modalType === "shows"){
+        buttonContent = (
+            <Button onPress={onAddFavorites} style={styles.buttons} title={"Add to My List"} color={'#33ADFF'}/>
+        )
+    }else{
+        buttonContent = (
+            <Button onPress={onAddFavorites} style={styles.buttons} title={"Remove from My List"} color={'#33ADFF'}/>
+        )
+    }
     return(
 
         <Modal onRequestClose={props.onModalClose} visible={props.selectedItem != null} animationType={'slide'}>
             <View style={styles.modal}>
                 {modalContent}
-                <Button onPress={onAddFavorites} style={styles.buttons} title={"Add to My List"} color={'#33ADFF'}/>
+                {buttonContent}
                 <Button style={styles.buttons} title={"Close"} color={"red"} onPress={props.onModalClose}/>
             </View>
         </Modal>

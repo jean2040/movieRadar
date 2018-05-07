@@ -5,7 +5,7 @@ class FavoritesList extends React.Component{
     constructor(props){
         super(props);
         this.renderItem = this.renderItem.bind(this);
-        console.log("favorite list"+this.props.favorites)
+
     }
 
     render(){
@@ -30,7 +30,7 @@ class FavoritesList extends React.Component{
                     <Image
                         style={styles.poster}
                         source={{uri: image }} />
-                    <Text style={styles.description}>
+                    <Text numberOfLines={3} ellipsizeMode ={'tail'} style={styles.description}>
                         {item.overview}
                     </Text>
                 </View>

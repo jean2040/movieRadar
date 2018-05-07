@@ -22,7 +22,7 @@ class showList extends React.Component{
     renderItem({item}){
         const image = 'https://image.tmdb.org/t/p/w154' + item.poster_path;
         return(
-            <TouchableOpacity onPress={() => this.props.onItemSelected(item)}>
+            <TouchableOpacity onPress={() => this.props.onItemSelected(item, "shows")}>
                 <View style={styles.row}>
                     <Text style={styles.title}>
                         {item.title}
@@ -30,7 +30,7 @@ class showList extends React.Component{
                     <Image
                         style={styles.poster}
                         source={{uri: image }} />
-                    <Text style={styles.description}>
+                    <Text numberOfLines={3} ellipsizeMode ={'tail'} style={styles.description}>
                         {item.overview}
                     </Text>
                 </View>
