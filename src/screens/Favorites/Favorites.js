@@ -3,7 +3,7 @@ import { View, Button } from 'react-native';
 import FavoritesList from '../../components/FavoritesList/FavoritesList';
 import MovieDetail from '../../components/MovieDetails/MovieDetails'
 import { connect } from 'react-redux';
-import {selectedPlace2, deselectPlace, addFavorite, fetchFavorites} from '../../store/actions/index';
+import {selectedPlace2, deselectPlace, fetchFavorites} from '../../store/actions/index';
 
 class Favorites extends Component {
     constructor(props){
@@ -20,10 +20,6 @@ class Favorites extends Component {
     modalClosedHandler =()=>{
         console.log("DeSelect item");
         this.props.onDeselectPlace();
-    };
-    addFavoriteHandler = (item) =>{
-        console.log("Add Favorite Handler" +this.props.selectedItem);
-        this.props.onAddFavorite(item)
     };
 
     render(){
@@ -54,7 +50,7 @@ const mapDispatchToProps = dispatch =>{
         onGetFavorites:()=>dispatch(fetchFavorites()),
         onSelectPlace2: (item, modalType) => dispatch(selectedPlace2(item, modalType)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
-        onAddFavorite: (item) => dispatch(addFavorite(item))
+
     }
 };
 

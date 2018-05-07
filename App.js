@@ -1,7 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 import {Provider } from 'react-redux';
 import AuthScreen from './src/screens/Auth/Auth';
-import ShowListScreen from './src/screens/showList/showList';
+import ShowListScreen from './src/screens/showListScreen/showListScreen';
 import RandomShow from './src/screens/RandomShow/RandomShow';
 import Favorites from './src/screens/Favorites/Favorites';
 import SwitchButton from './src/screens/ui/switchButton/switchButton'
