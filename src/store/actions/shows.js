@@ -25,21 +25,19 @@ export const getData =()=>{
 
            };
 
-export const addFavorite=()=>{
+export const addFavorite=(myFavorite)=>{
     return (dispatch) => {
-            const favoritesData = {
-                name: "Movie name",
-                description: "Movie description"
-            };
-            fetch("https://movieradar-b41ec.firebaseio.com/favoritesTest.json", {
-                method: "POST",
-                body: JSON.stringify(favoritesData)
-            })
-                .catch(err => console.log(err))
-                .then(res => res.json())
-                .then(parsedRef => {
-                    //console.log(parsedRef)
-                });
+
+        fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
+            method: "POST",
+            body: JSON.stringify(myFavorite)
+        })
+            .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(parsedRef => {
+                console.log("Favorite Added?");
+                dispatch(fetchFavorites())
+            });
         };
 };
 
@@ -89,7 +87,7 @@ export const fetchFavorites =()=>{
 
                         })
                     }
-                    console.log(favorites);
+                    //console.log(favorites);
                     return dispatch({type: FETCH_FAVORITES, favorites: favorites});
                 });
 

@@ -4,22 +4,26 @@ import { Modal, View, Image, Text, Button, StyleSheet, ScrollView } from 'react-
 const itemDetails = (props) => {
 
     const onAddFavorites = () => {
-        const favoritesData = {
-            movieTitle: props.selectedItem.title,
-            poster_path: props.selectedItem.poster_path,
-            vote: props.selectedItem.vote_average,
-            release_date: props.selectedItem.release_date,
-            overview: props.selectedItem.overview
+
+        const myFavorite = {
+                movieTitle: props.selectedItem.title,
+                poster_path: props.selectedItem.poster_path,
+                vote: props.selectedItem.vote_average,
+                release_date: props.selectedItem.release_date,
+                overview: props.selectedItem.overview
         };
-        fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
+
+        props.onAddFavorite(myFavorite)
+
+        /*fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
             method: "POST",
-            body: JSON.stringify(favoritesData)
+            body: JSON.stringify(myFavorite)
         })
             .catch(err => console.log(err))
             .then(res => res.json())
             .then(parsedRef => {
                 console.log(parsedRef)
-            });
+            });*/
 
     };
     let modalContent = null;
@@ -40,6 +44,7 @@ const itemDetails = (props) => {
         );
     }
     let buttonContent = null;
+
     if(props.modalType === "shows"){
         buttonContent = (
             <Button onPress={onAddFavorites} style={styles.buttons} title={"Add to My List"} color={'#33ADFF'}/>

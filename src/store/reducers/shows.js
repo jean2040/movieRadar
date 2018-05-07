@@ -5,7 +5,8 @@ const initialState={
     selectedItem: null,
     data: [],
     favorites: [],
-    modalType: null
+    modalType: null,
+    myFavorite: null
 };
 
 const reducer = (state = initialState, action)=>{
@@ -22,13 +23,11 @@ const reducer = (state = initialState, action)=>{
             };
 
         case 'ADD_FAVORITE':
-            console.log("Add Favorite Reducer"+ action.show);
+            console.log("Add Favorite Reducer");
             return{
                 ...state,
-                    shows: state.shows.concat({
-                    key: Math.random(),
-                    show: action.show
-                })
+                    myFavorite: action.myFavorite
+
 
             };
         case 'DELETE_PLACE':

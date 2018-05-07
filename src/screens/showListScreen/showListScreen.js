@@ -25,10 +25,6 @@ class ShowListScreen extends Component {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
-    componentDidMount(){
-        this.props.onGetData(); //call the action
-        }
-
     placeSelectedHandler = (item, modalType) =>{
         console.log("Select item");
         this.props.onSelectPlace(item, modalType);
@@ -37,10 +33,13 @@ class ShowListScreen extends Component {
         console.log("DeSelect item");
         this.props.onDeselectPlace();
     };
-    addFavoriteHandler = () =>{
-        console.log("Add Favorite Handler");
-        this.props.onAddFavorite()
+    addFavoriteHandler = (myFavorite) =>{
+        alert("Add Favorite Handler");
+        this.props.onAddFavorite(myFavorite)
     };
+    componentDidMount(){
+        this.props.onGetData(); //call the action
+    }
 
     render(){
         if (this.props.isLoading){
@@ -57,8 +56,9 @@ class ShowListScreen extends Component {
                     <MovieDetail selectedItem={this.props.selectedItem}
                                  modalType={this.props.modalType}
                                  onModalClose={this.modalClosedHandler}
+                                 onAddFavorite={this.addFavoriteHandler}
                     />
-                    <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler} />
+                    <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler}/>
                 </View>
             )
         }
@@ -83,7 +83,8 @@ const mapStateToProps = state => {
         selectedItem: state.places.selectedItem,
         modalType:  state.places.modalType,
         data: state.places.data,
-        isLoading: state.ui.isLoading
+        isLoading: state.ui.isLoading,
+        myFavorite: state.places.myFavorite
     }
 };
 
@@ -92,7 +93,7 @@ const mapDispatchToProps = dispatch =>{
         onGetData:()=>dispatch(getData()),
         onSelectPlace: (item, modalType) => dispatch(selectedPlace(item, modalType)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
-        onAddFavorite: () => dispatch(addFavorite())
+        onAddFavorite: (myFavorite) => dispatch(addFavorite(myFavorite))
     }
 };
 
