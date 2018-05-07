@@ -14,18 +14,12 @@ const itemDetails = (props) => {
         };
 
         props.onAddFavorite(myFavorite)
+            };
 
-        /*fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
-            method: "POST",
-            body: JSON.stringify(myFavorite)
-        })
-            .catch(err => console.log(err))
-            .then(res => res.json())
-            .then(parsedRef => {
-                console.log(parsedRef)
-            });*/
-
+    const onDeleteFavorites = () => {
+        props.onDeleteShow(props.selectedItem.id)
     };
+
     let modalContent = null;
     if(props.selectedItem){
         const image = 'https://image.tmdb.org/t/p/w154' + props.selectedItem.poster_path;
@@ -51,12 +45,12 @@ const itemDetails = (props) => {
         )
     }else{
         buttonContent = (
-            <Button onPress={onAddFavorites} style={styles.buttons} title={"Remove from My List"} color={'#33ADFF'}/>
+            <Button onPress={onDeleteFavorites} style={styles.buttons} title={"Remove from My List"} color={'#33ADFF'}/>
         )
     }
     return(
 
-        <Modal onRequestClose={props.onModalClose} visible={props.selectedItem != null} animationType={'slide'}>
+        <Modal onRequestClose={props.onModalClose} visible={props.modalType === "shows"} animationType={'slide'}>
             <View style={styles.modal}>
                 {modalContent}
                 {buttonContent}

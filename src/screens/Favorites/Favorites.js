@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
 import FavoritesList from '../../components/FavoritesList/FavoritesList';
-import MovieDetail from '../../components/MovieDetails/MovieDetails'
+import FavoriteDetails from '../../components/FavoritesList/FavoriteDetails'
 import { connect } from 'react-redux';
-import {selectedPlace2, deselectPlace, fetchFavorites} from '../../store/actions/index';
+import {selectedPlace2, deselectPlace, fetchFavorites, deleteShow} from '../../store/actions/index';
 
 class Favorites extends Component {
     constructor(props){
         super(props);
     }
+
+
     componentDidMount(){
         this.props.onGetFavorites(); //call the action
-
     }
 
     placeSelectedHandler = (item, modalType) =>{
@@ -22,12 +23,17 @@ class Favorites extends Component {
         this.props.onDeselectPlace();
     };
 
+    deleteShowHandler = (id)=>{
+        console.log(id);
+        this.props.onDeleteShow(id);
+    };
+
     render(){
         return(
             <View>
-                <MovieDetail selectedItem={this.props.selectedItem}
-                             onModalClose={this.modalClosedHandler}
-                             modalType={this.props.modalType}
+                <FavoriteDetails selectedItem={this.props.selectedItem}
+                                 onModalClose={this.modalClosedHandler}
+                                 onDeleteShow={this.deleteShowHandler}
                 />
                 <FavoritesList favorites={this.props.favorites} onItemSelected={this.placeSelectedHandler} />
             </View>
@@ -50,6 +56,7 @@ const mapDispatchToProps = dispatch =>{
         onGetFavorites:()=>dispatch(fetchFavorites()),
         onSelectPlace2: (item, modalType) => dispatch(selectedPlace2(item, modalType)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
+        onDeleteShow: (id)=> dispatch(deleteShow(id))
 
     }
 };

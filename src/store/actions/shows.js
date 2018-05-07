@@ -1,4 +1,4 @@
-import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
+import { DATA_AVAILABLE, ADD_FAVORITE, REMOVE_SHOW, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
 import { startLoading, stopLoading } from './index'
 
 export const getData =()=>{
@@ -41,10 +41,28 @@ export const addFavorite=(myFavorite)=>{
         };
 };
 
-export const deletePlace = () => {
-  return{
-      type: DELETE_PLACE
+export const deleteShow = (id) => {
+    console.log("Delete Show");
+  return(dispatch) => {
+      dispatch(removeShow(id));
+      fetch("https://movieradar-b41ec.firebaseio.com/favorites/"+ id +".json", {
+          method: "DELETE"
+      })
+          .catch(err => console.log(err))
+          .then(res => res.json())
+          .then(parsedRef => {
+              console.log("Favorite Removed");
+              //dispatch(fetchFavorites())
+          });
   }
+};
+
+export const removeShow = (id) =>{
+    return{
+        type: REMOVE_SHOW,
+        id: id
+
+    }
 };
 
 export const selectedPlace =(item, modalType) => {
