@@ -4,4 +4,6 @@ export const DELETE_PLACE = 'DELETE_PLACE';
 export const SELECT_PLACE = 'SELECT_PLACE';
 export const DESELECT_PLACE = 'DESELECT_PLACE';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
+export const START_LOADING = 'START_LOADING';
+export const STOP_LOADING = 'STOP_LOADING';
 
