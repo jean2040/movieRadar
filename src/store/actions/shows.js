@@ -1,14 +1,21 @@
-import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE,FETCH_FAVORITES, START_LOADING, STOP_LOADING } from './actionTypes'
+import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE,FETCH_FAVORITES } from './actionTypes';
+import { startLoading, stopLoading } from './index'
 
 export const getData =()=>{
 
     return(dispatch)=>{
+        dispatch(startLoading());
         //Make API call
         setTimeout(()=> {
             return fetch('https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63')
+                .catch(err => {
+                    console.log(err);
+                    dispatch(stopLoading());
+                })
                 .then((response) => response.json())
                 .then((responseJson)=> {
                     //console.log(responseJson);
+                    dispatch(stopLoading());
                     return dispatch({type: DATA_AVAILABLE, data: responseJson.results});
                 });
 
@@ -18,13 +25,13 @@ export const getData =()=>{
 
            };
 
-export const addFavorite=(item)=>{
+export const addFavorite=()=>{
     return (dispatch) => {
             const favoritesData = {
                 name: "Movie name",
                 description: "Movie description"
             };
-            fetch("https://movieradar-b41ec.firebaseio.com/favorites.json", {
+            fetch("https://movieradar-b41ec.firebaseio.com/favoritesTest.json", {
                 method: "POST",
                 body: JSON.stringify(favoritesData)
             })

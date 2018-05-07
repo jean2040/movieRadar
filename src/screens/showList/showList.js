@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import ShowList from '../../components/showList/showlist';
 import MovieDetail from '../../components/MovieDetails/MovieDetails'
 import { connect } from 'react-redux';
@@ -37,28 +37,39 @@ class ShowListScreen extends Component {
         console.log("DeSelect item");
         this.props.onDeselectPlace();
     };
-    addFavoriteHandler = (item) =>{
-        console.log("Add Favorite Handler" +this.props.selectedItem);
-        this.props.onAddFavorite(item)
+    addFavoriteHandler = () =>{
+        console.log("Add Favorite Handler");
+        this.props.onAddFavorite()
     };
 
     render(){
-        return(
-            <View>
-                <MovieDetail selectedItem={this.props.selectedItem}
-                             onModalClose={this.modalClosedHandler}
-                             />
-                <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler} />
-            </View>
-        )
+        if (this.props.isLoading){
+            return(
+                <View style={styles.activityIndicatorContainer}>
+                    <ActivityIndicator animating={true}/>
+                    <Text>{"Loading..."}</Text>
+                </View>
+            );
+        } else {
+            return(
+
+                <View>
+                    <MovieDetail selectedItem={this.props.selectedItem}
+                                 onModalClose={this.modalClosedHandler}
+                    />
+                    <ShowList data={this.props.data} onItemSelected={this.placeSelectedHandler} />
+                </View>
+            )
+        }
+
 
     }
 
-
-    onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    //THIS CODE HERE IS NOT WORKING YET - HAVE TO REVIEW DOCS
+    onNavigatorEvent(event) { // this is the onPress handler
         if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
             if (event.id === 'switch-button') { // this is the same id field from the static navigatorButtons definition
-                alert('NavBar', 'Edit button pressed');
+                alert('NavBar', ' button pressed');
             }
 
         }
@@ -69,7 +80,8 @@ class ShowListScreen extends Component {
 const mapStateToProps = state => {
     return {
         selectedItem: state.places.selectedItem,
-        data: state.places.data
+        data: state.places.data,
+        isLoading: state.ui.isLoading
     }
 };
 
@@ -78,8 +90,17 @@ const mapDispatchToProps = dispatch =>{
         onGetData:()=>dispatch(getData()),
         onSelectPlace: (item) => dispatch(selectedPlace(item)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
-        onAddFavorite: (item) => dispatch(addFavorite(item))
+        onAddFavorite: () => dispatch(addFavorite())
     }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowListScreen);
+
+const styles = StyleSheet.create({
+    activityIndicatorContainer:{
+        backgroundColor: "#fff",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+    },
+    });
