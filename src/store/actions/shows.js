@@ -1,13 +1,17 @@
-import { DATA_AVAILABLE, ADD_FAVORITE, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
+import { DATA_AVAILABLE,FETCH_MOVIE,FETCH_TV, ADD_FAVORITE, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
 import { startLoading, stopLoading } from './index'
 
-export const getData =()=>{
-
+export const getData =(searchFor)=>{
+    if(searchFor === "movie"){
+        var buildURL = 'https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63';
+    }else {
+        var buildURL = 'https://api.themoviedb.org/3/tv/popular?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63'
+    }
     return(dispatch)=>{
         dispatch(startLoading());
         //Make API call
         setTimeout(()=> {
-            return fetch('https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63')
+            return fetch(buildURL)
                 .catch(err => {
                     console.log(err);
                     dispatch(stopLoading());
@@ -24,6 +28,58 @@ export const getData =()=>{
     };
 
            };
+
+
+
+
+export const getMovie =()=>{
+
+    return(dispatch)=>{
+        dispatch(startLoading());
+        //Make API call
+        setTimeout(()=> {
+            return fetch('https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63')
+                .catch(err => {
+                    console.log(err);
+                    dispatch(stopLoading());
+                })
+                .then((response) => response.json())
+                .then((responseJson)=> {
+                    //console.log(responseJson);
+                    dispatch(stopLoading());
+                    return dispatch({type: GET_MOVIE, data: responseJson.results});
+                });
+
+        },2000);
+
+    };
+
+};
+export const getTV =()=>{
+
+    return(dispatch)=>{
+        dispatch(startLoading());
+        //Make API call
+        setTimeout(()=> {
+            return fetch('https://api.themoviedb.org/3/tv/popular?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63')
+                .catch(err => {
+                    console.log(err);
+                    dispatch(stopLoading());
+                })
+                .then((response) => response.json())
+                .then((responseJson)=> {
+                    //console.log(responseJson);
+                    dispatch(stopLoading());
+                    return dispatch({type: FETCH_TV, data: responseJson.results});
+                });
+
+        },2000);
+
+    };
+
+};
+
+
 
 export const addFavorite=(myFavorite)=>{
     return (dispatch) => {

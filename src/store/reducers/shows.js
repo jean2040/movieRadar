@@ -1,4 +1,4 @@
-import { DATA_AVAILABLE,ADD_FAVORITE, DELETE_PLACE, DESELECT_SHOW, SELECT_SHOW, FETCH_FAVORITES } from '../actions/actionTypes'
+import { DATA_AVAILABLE, FETCH_TV, FETCH_MOVIE, ADD_FAVORITE, DELETE_PLACE, DESELECT_SHOW, SELECT_SHOW, FETCH_FAVORITES } from '../actions/actionTypes'
 
 const initialState={
     shows: [],
@@ -12,6 +12,16 @@ const initialState={
 const reducer = (state = initialState, action)=>{
     switch (action.type){
         case 'DATA_AVAILABLE':
+            return {
+                ...state,
+                data: action.data
+            };
+        case 'FETCH_MOVIE':
+            return {
+                ...state,
+                data: action.data
+            };
+        case 'FETCH_TV':
             return {
                 ...state,
                 data: action.data

@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet,View, Switch} from 'react-native'
+import { StyleSheet,View, Switch, Text} from 'react-native';
+import {getData} from "../../../store/actions";
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     switch: {
@@ -17,28 +19,34 @@ class SwitchButton  extends React.Component{
     constructor(){
         super();
         this.state={
-            switchValue : false
+            switchValue : false,
+            titleText: "Movies"
         }
     }
 
     ShowAlert = (value) =>{
 
         this.setState({
-
             switchValue: value
         });
 
         if(value === true)
         {
             //Perform any task here which you want to execute on Switch ON event.
-            //alert("Switch is On.");
+            this.props.onGetData("tv");
+            this.setState({titleText: "TV Shows"});
+
         }
         else{
             //Perform any task here which you want to execute on Switch OFF event.
-            //alert("Switch is Off.");
+            this.props.onGetData("movie");
+            this.setState({titleText: "Movies"});
+
+
         }
 
-    }
+    };
+
 
     render() {
         return (
@@ -47,12 +55,23 @@ class SwitchButton  extends React.Component{
                 <Switch
                     style={styles.switch}
                     onValueChange={(value) => this.ShowAlert(value)}
-                    value={this.state.switchValue}/>
+                    value={this.state.switchValue}
+                />
             </View>
 
 
         )
     }
 };
+const mapStateToProps = state => {
+    return {
+        data: state.data,
+    }
+};
 
-export default SwitchButton
+const mapDispatchToProps = dispatch =>{
+    return{
+        onGetData:(value)=>dispatch(getData(value))
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SwitchButton);

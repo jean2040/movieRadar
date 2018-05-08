@@ -13,6 +13,7 @@ class showList extends React.Component{
                <FlatList
                     ref='listRef'
                     data={this.props.data}
+                    extraData={this.state}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => index.toString()}
                 />

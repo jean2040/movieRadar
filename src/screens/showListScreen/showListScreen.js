@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import ShowList from '../../components/showList/showlist';
 import MovieDetail from '../../components/MovieDetails/MovieDetails'
 import { connect } from 'react-redux';
-import { getData,selectedPlace,deselectPlace, addFavorite } from '../../store/actions/index';
+import { getData, selectedPlace,deselectPlace, addFavorite } from '../../store/actions/index';
 
 class ShowListScreen extends Component {
 
@@ -90,7 +90,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return{
-        onGetData:()=>dispatch(getData()),
+        onGetData:()=>dispatch(getData('movie')),
         onSelectPlace: (item, modalType) => dispatch(selectedPlace(item, modalType)),
         onDeselectPlace: ()=> dispatch(deselectPlace()),
         onAddFavorite: (myFavorite) => dispatch(addFavorite(myFavorite))

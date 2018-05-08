@@ -1,4 +1,9 @@
 export const DATA_AVAILABLE = 'DATA_AVAILABLE';
+
+export const FETCH_MOVIE = 'FETCH_MOVIE';
+export const FETCH_TV = 'FETCH_TV';
+
+
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_PLACE = 'DELETE_PLACE';
 export const SELECT_SHOW = 'SELECT_SHOW';
