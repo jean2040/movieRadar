@@ -34,7 +34,7 @@ class ShowListScreen extends Component {
         this.props.onDeselectPlace();
     };
     addFavoriteHandler = (myFavorite) =>{
-        alert("Add Favorite Handler");
+        alert("Favorite Added");
         this.props.onAddFavorite(myFavorite)
     };
     componentDidMount(){
