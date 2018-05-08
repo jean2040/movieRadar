@@ -23,7 +23,6 @@ class ShowListScreen extends Component {
 
     constructor(props){
         super(props);
-        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     }
     placeSelectedHandler = (item, modalType) =>{
         console.log("Select item");

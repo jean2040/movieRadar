@@ -1,7 +1,6 @@
 export const DATA_AVAILABLE = 'DATA_AVAILABLE';
 
-export const FETCH_MOVIE = 'FETCH_MOVIE';
-export const FETCH_TV = 'FETCH_TV';
+export const RANDOM = 'RANDOM';
 
 
 export const ADD_FAVORITE = 'ADD_FAVORITE';
