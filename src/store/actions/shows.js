@@ -1,4 +1,4 @@
-import { DATA_AVAILABLE, ADD_FAVORITE,RANDOM, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
+import { DATA_AVAILABLE, ADD_FAVORITE,REMOVE_SHOW, RANDOM, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
 import { startLoading, stopLoading } from './index'
 
 export const getData =(searchFor)=>{
