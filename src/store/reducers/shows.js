@@ -17,15 +17,10 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 data: action.data
             };
-        case 'FETCH_MOVIE':
+        case 'RANDOM':
             return {
                 ...state,
-                data: action.data
-            };
-        case 'FETCH_TV':
-            return {
-                ...state,
-                data: action.data
+                randomPick: action.randomPick
             };
         case 'FETCH_FAVORITES':
             return {
