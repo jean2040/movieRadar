@@ -1,18 +1,7 @@
 import React from 'react';
-import { StyleSheet,View, Switch, Text} from 'react-native';
+import { StyleSheet, View, Switch, Text} from 'react-native';
 import {getData} from "../../../store/actions";
 import { connect } from 'react-redux';
-
-const styles = StyleSheet.create({
-    switch: {
-        overflow: 'hidden',
-        width: 40,
-        height: 34,
-        borderRadius: 34 / 2,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
 
 // Our custom component we want as a button in the nav bar
 class SwitchButton  extends React.Component{
@@ -34,7 +23,7 @@ class SwitchButton  extends React.Component{
         {
             //Perform any task here which you want to execute on Switch ON event.
             this.props.onGetData("tv");
-            this.setState({titleText: "TV Shows"});
+            this.setState({titleText: "TV"});
 
         }
         else{
@@ -51,12 +40,21 @@ class SwitchButton  extends React.Component{
     render() {
         return (
 
-            <View>
+
+
+            <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+
                 <Switch
-                    style={styles.switch}
+                    style={styles.switch }
                     onValueChange={(value) => this.ShowAlert(value)}
                     value={this.state.switchValue}
                 />
+                    <Text style={styles.titleType}>
+                        {this.state.titleText}
+                    </Text>
+
+
+
             </View>
 
 
@@ -75,3 +73,10 @@ const mapDispatchToProps = dispatch =>{
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SwitchButton);
+
+const styles = StyleSheet.create({
+    titleType:{
+        fontSize: 16,
+        fontWeight: "500",
+    },
+});
