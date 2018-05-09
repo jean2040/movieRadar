@@ -1,13 +1,23 @@
-import { DATA_AVAILABLE, ADD_FAVORITE, REMOVE_SHOW, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
+import { DATA_AVAILABLE, ADD_FAVORITE,REMOVE_SHOW, RANDOM, DELETE_PLACE, SELECT_SHOW, DESELECT_SHOW,FETCH_FAVORITES } from './actionTypes';
 import { startLoading, stopLoading } from './index'
 
-export const getData =()=>{
+export const getData =(searchFor)=>{
+    if(searchFor === "movie"){
+        var buildURL = 'https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63';
+    }
+    else if(searchFor === "tv") {
+        var buildURL = 'https://api.themoviedb.org/3/tv/popular?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63';
 
+    }
+    else {
+        var buildURL = "";
+        console.log('An error has occur in the getData function');
+    }
     return(dispatch)=>{
         dispatch(startLoading());
         //Make API call
         setTimeout(()=> {
-            return fetch('https://api.themoviedb.org/3/movie/now_playing?page=1&language=en-US&api_key=54990a7c99582d0e4be944feff253c63')
+            return fetch(buildURL)
                 .catch(err => {
                     console.log(err);
                     dispatch(stopLoading());
@@ -22,8 +32,7 @@ export const getData =()=>{
         },2000);
 
     };
-
-           };
+};
 
 export const addFavorite=(myFavorite)=>{
     return (dispatch) => {
@@ -114,6 +123,29 @@ export const fetchFavorites =()=>{
     };
 
 };
+export const getRandom =()=>{
+    var randomWords = require('random-words');
+    var wordArray =  randomWords(1);
+    var buildURL = "https://api.themoviedb.org/3/search/movie?api_key=54990a7c99582d0e4be944feff253c63&query=" + wordArray[0];
+    return(dispatch)=>{
+        dispatch(startLoading());
+        //Make API call
+        setTimeout(()=> {
+            return fetch(buildURL)
+                .catch(err => {
+                    console.log(err);
+                    dispatch(stopLoading());
+                })
+                .then((response) => response.json())
+                .then((responseJson)=> {
+                    //console.log(responseJson);
+                    dispatch(stopLoading());
+                    return dispatch({type: RANDOM, randomPick: responseJson.results});
+                });
 
+        },2000);
+
+    };
+};
 
 

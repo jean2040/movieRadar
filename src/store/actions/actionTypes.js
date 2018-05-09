@@ -1,4 +1,5 @@
 export const DATA_AVAILABLE = 'DATA_AVAILABLE';
+export const RANDOM = 'RANDOM';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_SHOW = 'REMOVE_SHOW';
 export const SELECT_SHOW = 'SELECT_SHOW';

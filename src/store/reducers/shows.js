@@ -17,6 +17,11 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 data: action.data
             };
+        case 'RANDOM':
+            return {
+                ...state,
+                randomPick: action.randomPick
+            };
         case 'FETCH_FAVORITES':
             return {
                 ...state,
