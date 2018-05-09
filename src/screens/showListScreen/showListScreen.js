@@ -23,7 +23,19 @@ class ShowListScreen extends Component {
 
     constructor(props){
         super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
     }
+
+    onNavigatorEvent = event => {
+        if (event.type === "NavBarButtonPress") {
+            if (event.id === "sideDrawerToggle") {
+                this.props.navigator.toggleDrawer({
+                    side: "left"
+                });
+            }
+        }
+    };
+
     placeSelectedHandler = (item, modalType) =>{
         console.log("Select item");
         this.props.onSelectPlace(item, modalType);
@@ -65,15 +77,7 @@ class ShowListScreen extends Component {
 
     }
 
-    //THIS CODE HERE IS NOT WORKING YET - HAVE TO REVIEW DOCS
-    onNavigatorEvent(event) { // this is the onPress handler
-        if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-            if (event.id === 'switch-button') { // this is the same id field from the static navigatorButtons definition
-                alert('NavBar', ' button pressed');
-            }
 
-        }
-    }
 
 }
 
